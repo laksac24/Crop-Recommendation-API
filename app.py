@@ -14,7 +14,6 @@ import os
 
 app = FastAPI()
 
-
 class ModelInput(BaseModel):
     N: int
     P: int
@@ -24,10 +23,8 @@ class ModelInput(BaseModel):
     ph: float
     rainfall: float
 
-
 # Load your model
 model = pickle.load(open("model1.pkl", "rb"))
-
 
 @app.post('/predict')
 def prediction(input_param: ModelInput):
@@ -80,6 +77,7 @@ def prediction(input_param: ModelInput):
     predicted_crop = crop_map.get(prediction[0], "Unknown crop")
 
     return {"predicted_crop": predicted_crop}
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))  # Default to 8000 if PORT is not set
     uvicorn.run(app, host="0.0.0.0", port=port)
