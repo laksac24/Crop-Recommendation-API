@@ -10,6 +10,7 @@ from pydantic import BaseModel
 import pickle
 import uvicorn
 import json
+import os
 
 app = FastAPI()
 
