@@ -8,6 +8,7 @@ This is a temporary script file.
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
+import uvicorn
 import json
 
 app = FastAPI()
@@ -78,3 +79,6 @@ def prediction(input_param: ModelInput):
     predicted_crop = crop_map.get(prediction[0], "Unknown crop")
 
     return {"predicted_crop": predicted_crop}
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Default to 8000 if PORT is not set
+    uvicorn.run(app, host="0.0.0.0", port=port)
